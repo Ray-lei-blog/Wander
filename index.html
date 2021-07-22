@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+		@font-face {
+			font-family: "pix";
+			src: url(static/IPix.ttf);
+		}
+		* {
+			scroll-behavior: smooth;
+		}
+		body {
+			width: 100vw;
+			height: 100vh;
+			margin: 0;
+			background-color: black;
+			font-family: pix;
+			font-size: 16px;
+			color: white;
+			overflow: hidden;
+		}
+		p {
+			font-family: pix;
+			font: 300;
+			color: white;
+		}
+		video{
+			position: fixed;
+			right: 0;
+			bottom: 0;
+			min-width: 100%;
+			min-height: 100%; 
+			width: auto;
+			height: auto; 
+			z-index: -100; 
+			/* -webkit-filter: grayscale(20%);//添加灰度蒙版，如果设定为100%则视频显示为黑白 */
+		}
+		.container {
+			width: inherit;
+			height: inherit;
+			display: flex;
+			justify-content: center; 
+			align-items: flex-end; 
+			background-color: rgba(0, 0, 0, 0.7)
+		}
+		.loading {
+			position: relative;
+			bottom: 50%;
+			width: 50rem;
+			text-align: center;
+		}
+		#main {
+			width: 50rem;
+			height: 90vh;
+			position: relative;
+			bottom: 10%;
+			display: flex;
+			flex-direction: column;
+			overflow-y: auto;
+		}
+		.log {
+			margin-top: 10%;
+		}
+		.poi {
+			display: flex;
+			margin-bottom: 1.31rem;
+		}
+		.location {
+			width: 2rem;
+		}
+		.poiName {
+			font-size: 2.63rem;
+			margin-left: 0.75rem;
+		}
+		.position {
+			display: flex;
+			vertical-align: middle;
+			margin-bottom: 1.69rem;
+		}
+		.year {
+			background-color: #E6E6E6;
+			color: black;
+			width: 8.31rem;
+			height: 2.63rem;
+			text-align: center;
+			line-height: 2.63rem;
+			font-size: 1.75rem;
+			margin-top: 0.1rem;
+			margin-right: 0.94rem;
+		}
+		.gps {
+			height: 3rem;
+			font-size: 1rem;
+			line-height: 1.5rem;
+		}
+		.content {
+			border: solid 0.06rem;
+			border-color: white;
+		}
+		.desc {
+			display: flex;
+			margin: 2.38rem 0 2.38rem 0;
+			font-size: 1rem;
+			line-height: 1.75rem;
+		}
+		.title {
+			background-color: #E6E6E6;
+			color: black;
+			line-height: 1.75rem;
+			padding: 0 1.2rem 0 2.63rem;
+		}
+		.time {
+			border: solid 0.03rem #E6E6E6;
+			padding: 0 1.4rem 0 1.2rem;
+		}
+		.text {
+			margin: 0 2.63rem 2.63rem 2.63rem;
+			line-height: 1.75rem;
+		}
+		pre {
+			font-family: pix;
+			font-weight: 100;
+			white-space: pre-wrap;
+			word-wrap: break-word;
+		}
+		.tips {
+			font-family: pix;
+			font-weight: 100;
+			color: #79D5DA;
+			margin: 0 0 2.63rem 2.63rem;
+		}
+		.photo {
+			width: 64%;
+			margin-left: 2.63rem;
+			margin-bottom: 2.63rem;
+		}
+		#sub {
+			margin-left: 6rem;
+			width: 25%;
+			position: relative;
+			bottom: 10%;
+		}
+		#qrcode {
+			width: 12rem;
+		}
+		#intro {
+			color: #79D5DA;
+			line-height: 1.75rem;
+		}
+		#logo {
+			height: 2.31rem;
+		}
+		#teams {
+			color: #80A6A9;
+
+		}
+	</style>
+	<title></title>
+</head>
+<body>
+	<div id="app" class="container" ref="app">
+		<video src="static/bg_video.mp4" type="video/mp4" muted="muted" loop="loop" autoplay="autoplay"></video>
+		<fetch-data url="http://101.89.157.205:1348/travel-logs?sort=-talking_time&per-page=2">
+			<!-- <div id="main"> -->
+			<div slot="loading" class="loading">Loading messages</div>
+
+			<div slot-scope="{ response: items }" id="main" ref="main">
+				<div>
+					<!-- 静态log1 -->
+					<div class="log">
+						<div class="poi">
+							<img class="location" src="static/location.png" alt="location"/>
+							<div class="poiName">人大附中<br></div>
+						</div>
+						<div class="position">
+							<div class="year">3090年</div>
+							<div class="gps">经度：116.42199197916412<br>纬度：40.062553086221264</div>
+						</div>
+						<div class="content">
+							<div class="desc">
+								<div class="title">最新行动记录如下</div>
+								<div class="time">时间交汇点：2021年7月9日 21:49</div>
+							</div>
+							<div class="context">	
+								<div class="text">
+									<pre>
+这里是3050年的东方明珠。我的飞行器缓缓降落。
+我穿着笔挺西服走进了酒店内。这时候一群记者围堵了上来。
+"请问您就是那位在网络上火爆全球的作家吗？"
+"请问你对自己创造这个世界有什么看法。"
+"听闻您已经获得了诺贝尔奖，请问您还会继续参加奥运会吗？"
+"请问你对奥运会还有什么计划？"
+......
+面对记者的询问。我微笑道："我并不是什么奥运冠军，也没有获得什么奖项，而且这个世界是虚拟世界。"
+"虚拟世界吗？请问这是怎么回事呢？"
+									</pre>
+								</div>
+							</div>
+							<div class="tips">[行动详情仅0254号协助人可见]</div>
+							<img class="photo" src="static/Bitmap.png" alt="camera shot">
+						</div>
+					</div>
+					<!-- 静态log2 -->
+					<div class="log">
+						<div class="poi">
+							<img class="location" src="static/location.png" alt="location"/>
+							<div class="poiName">人大附中<br></div>
+						</div>
+						<div class="position">
+							<div class="year">3090年</div>
+							<div class="gps">经度：116.42199197916412<br>纬度：40.062553086221264</div>
+						</div>
+						<div class="content">
+							<div class="desc">
+								<div class="title">最新行动记录如下</div>
+								<div class="time">时间交汇点：2021年7月9日 21:49</div>
+							</div>
+							<div class="context">	
+								<div class="text">
+									<pre>
+这里是3050年的美罗城。我的飞行器缓缓降落。
+"这个就是美罗城吗？真的好漂亮啊！"
+飞船舱门打开，我看到外面的情况。一望无际全部都是人群，密集到连一丝缝隙都没有，这是一种什么样的景象？这里面的每一个人都是如此之多，而且还在源源不断的向着美罗城涌去，这些人到底是在干嘛？
+我疑惑的看向驾驶员，"我们这里是发生什么事了？"
+"回少爷，您是刚刚从学院毕业的新生吧！这里发生的事情和您的毕业典礼一模一样。"
+听到这里，我终于明白了。
+									</pre>
+								</div>
+							</div>
+							<div class="tips">[行动详情仅0254号协助人可见]</div>
+							<img class="photo" src="static/404.gif" alt="cannot find">
+						</div>
+					</div>
+					<!-- 新建一条log -->
+					<div class="log" v-for="item in items.slice(0,2).reverse()">
+					<div class="poi">
+						<img class="location" src="static/location.png" alt="location"/>
+						<div class="poiName">{{ item.address }}<br></div>
+					</div>
+					<div class="position">
+						<div class="year">{{ item.future_year }}年</div>
+						<div class="gps">经度：{{ item.location.lng }}<br>纬度：{{ item.location.lat }}</div>
+					</div>
+					<div class="content">
+						<div class="desc">
+							<div class="title">最新行动记录如下</div>
+							<div class="time">时间交汇点：{{ item.talking_time }}</div>
+						</div>
+						<div class="context">	
+							<div class="text">
+								<pre>{{ item.content }}</pre>
+							</div>
+						</div>
+						<div class="tips">[行动详情仅0254号协助人可见]</div>
+						<img class="photo" :src="item.photo" alt="photo">
+					</div>
+					</div>
+				</div>
+			</div>
+		</fetch-data>
+		<div id="sub">
+			<img id="qrcode" src="static/qrcode.png" alt="QR code" >
+			<p id="intro">扫码添加Wander Bot，<br>成为未来旅行的协助人吧。<br>发送“我想去：”+任意国内地点（如 我想去：香格里拉），即可开启未来旅程。</p>
+			<img id="logo" src="static/qr.png" alt="logo">
+			<br>
+			<p id = 'teams'><br>本项目由速冻代码搅拌机开发 <br>
+				设计/孙羽茜 &nbsp 后端/程晨航 &nbsp 前端/黄幸，雷宇<br>
+				Chatbot开发/程晨航，孙羽茜 &nbsp 协助/王泓霏，许莹
+			</p>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js"></script>
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.18.0/axios.min.js"></script>
+	<script>
+		Vue.component('fetch-data', {
+		props: ['url'],
+		data() {
+			return {
+			loaded: false,
+			response: null,
+			}
+		},
+		mounted() {
+			setInterval(() => {
+			    setTimeout(function(){}, 0)
+				axios.get(this.url,
+			{
+				headers: {
+					'Accept': 'application/json'
+				}
+			})
+				.then((response) => {
+					this.response = response
+					this.loaded = true
+				})
+			}, 1000)
+		},
+		render() {
+			if (!this.loaded) {
+			return this.$slots.loading[0]
+			}
+
+			return this.$scopedSlots.default({
+			response: this.response.data,
+			})
+		},
+		updated() {
+			let ele = document.getElementById("main")
+			if(ele.scrollHeight > ele.clientHeight) {
+				setTimeout(function(){
+					// 设置滚动条到最底部
+					ele.scrollTop = ele.scrollHeight;
+					ele.style.opacity = 1;
+				},50);
+			};
+		},
+		})
+
+		new Vue({
+			el: '#app'
+		})
+	</script>
+</body>
+</html>
